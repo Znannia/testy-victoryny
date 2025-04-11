@@ -1,0 +1,241 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    background-color: #1b1b1b;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #3e2723, #5d4037);
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    border: 2px solid #ffff00;
+    border-radius: 50%;
+}
+
+.youtube-icon img {
+    width: 40px;
+    margin-top: 10px;
+}
+
+.header-center {
+    flex: 1;
+    text-align: center;
+}
+
+.welcome-text {
+    font-size: 18px;
+    margin: 0;
+}
+
+h1 {
+    font-size: 36px;
+    color: #ffff00;
+    margin: 0;
+}
+
+h1 a {
+    color: #ffff00;
+    text-decoration: none;
+}
+
+.subtitle {
+    font-size: 18px;
+    background-color: #1a3c34;
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+.header-right {
+    text-align: right;
+}
+
+.clock, .date {
+    font-size: 18px;
+    color: #ffff00;
+}
+
+.subscribe-btn {
+    background-color: #ff0000;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: block;
+    margin-top: 10px;
+}
+
+.divider {
+    height: 2px;
+    background-color: #ffffff;
+    margin: 0;
+}
+
+.category-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.category-btn {
+    background-color: #ffff00;
+    color: #000000;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.category-btn:hover {
+    background-color: #e6e600;
+}
+
+.latest-videos, .random-videos, .category-videos {
+    padding: 20px;
+}
+
+.latest-videos h3, .random-videos h3, .category-videos h3 {
+    text-align: left;
+    color: #ffff00;
+    font-size: 28px;
+}
+
+#latest-videos, #random-videos, #category-videos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+#latest-videos div, #random-videos div, #category-videos div {
+    text-align: center;
+    border: 2px solid #1a3c34;
+    padding: 10px;
+}
+
+#latest-videos iframe, #random-videos iframe, #category-videos iframe {
+    width: 100%;
+    max-width: 300px;
+    height: 169px;
+}
+
+#latest-videos p, #random-videos p, #category-videos p {
+    color: #ffffff;
+    margin: 5px 0;
+}
+
+.new {
+    background-color: #ff0000;
+    color: #ffffff;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+footer {
+    background: linear-gradient(to right, #1a3c34, #2e7d32);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-logo {
+    width: 50px;
+}
+
+.footer-center {
+    text-align: center;
+}
+
+#categories-btn {
+    background-color: #ffff00;
+    color: #000000;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+#categories-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+#categories-list li a {
+    color: #ffff00;
+    text-decoration: none;
+}
+
+.footer-links {
+    margin-top: 20px;
+}
+
+.footer-links a {
+    color: #ffffff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.about, .contact, .privacy {
+    padding: 20px;
+    text-align: center;
+}
+
+.about-text, .privacy-text {
+    border: 2px solid #1a3c34;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+    .header-right {
+        text-align: center;
+        margin-top: 10px;
+    }
+    .category-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    .category-btn {
+        width: 80%;
+        text-align: center;
+    }
+    footer {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .footer-right {
+        text-align: center;
+    }
+}
