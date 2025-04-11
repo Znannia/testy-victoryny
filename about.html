@@ -3,45 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Про нас - Знання для всіх</title>
+    <title>Про нас - Тести Вікторини</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="index.html"><img src="logo.png" alt="Логотип"></a>
-            <a href="https://www.youtube.com/@ЗнанняДляВсіхТак" class="youtube-icon">
-                <img src="youtube-icon.png" alt="YouTube">
-            </a>
+            <img src="logo.png" alt="Логотип">
+            <div class="youtube-icon">
+                <a href="https://www.youtube.com/@znannia_dlia_vsikh" target="_blank">
+                    <img src="youtube-icon.png" alt="YouTube">
+                </a>
+            </div>
         </div>
-        <h1><a href="index.html">ЗНАННЯ ДЛЯ ВСІХ</a></h1>
+        <div class="header-center">
+            <p class="welcome-text">Вітаємо на сайті</p>
+            <h1><a href="index.html">ЗНАННЯ ДЛЯ ВСІХ</a></h1>
+            <p class="subtitle">Вікторини для всієї родини</p>
+        </div>
         <div class="header-right">
-            <a href="https://www.youtube.com/@ЗнанняДляВсіхТак?sub_confirmation=1" class="subscribe-btn">Підписатися</a>
+            <div id="clock" class="clock"></div>
+            <div id="date" class="date"></div>
+            <a href="https://www.youtube.com/@znannia_dlia_vsikh?sub_confirmation=1" target="_blank" class="subscribe-btn">Підписатися</a>
         </div>
     </header>
     <div class="divider"></div>
-    <main>
-        <section class="about">
-            <h2>Про нас</h2>
-            <div class="about-text">
-                <p>Вітаємо на каналі "Знання для всіх"! 📚✨</p>
-                <p>Ми створили цей канал, щоб ділитися корисними знаннями та цікавими фактами з усіма охочими. Тут ви знайдете безліч захопливих відео про логічні загадки, тести на уважність, цікаві факти з різних галузей науки та культури, а також цікаві задачі, які допоможуть вам покращити свої інтелектуальні здібності.</p>
-                <p>Підписуйтеся на наш канал і не пропустіть нові випуски, які допоможуть вам розширити свої горизонти та отримати нові знання. Залишайте лайки, коментарі та діліться нашими відео з друзями, щоб і вони могли долучитися до нашої спільноти, яка прагне знань та розвитку.</p>
-                <p>Разом ми зробимо навчання цікавим та доступним для всіх! 🚀🎓</p>
-                <p>Не забудьте натиснути на дзвіночок, щоб отримувати повідомлення про нові відео. Дякуємо, що ви з нами! ❤️</p>
-            </div>
-        </section>
-    </main>
-    <div class="divider"></div>
+    <div class="category-buttons">
+        <a href="category.html?category=Географія" class="category-btn">Географія</a>
+        <a href="category.html?category=Історія" class="category-btn">Історія</a>
+        <a href="category.html?category=Біблія" class="category-btn">Біблія</a>
+        <a href="category.html?category=Україна" class="category-btn">Україна</a>
+        <a href="category.html?category=Загальні знання" class="category-btn">Загальні знання</a>
+        <a href="category.html?category=Логіка" class="category-btn">Логіка</a>
+        <a href="category.html?category=Що зайве" class="category-btn">Що зайве</a>
+        <a href="category.html?category=Не програєш" class="category-btn">Не програєш</a>
+    </div>
+    <div class="about">
+        <h2>Про нас</h2>
+        <div class="about-text">
+            <p>Ласкаво просимо на сайт "Знання для всіх"! Ми пропонуємо цікаві та пізнавальні тести і вікторини для всієї родини. Наш контент охоплює різноманітні теми: від географії та історії до логічних задач і біблійних питань.</p>
+            <p>Наша мета – зробити навчання цікавим і доступним для всіх. Приєднуйтесь до нас на YouTube-каналі "Знання для всіх", де ми регулярно публікуємо нові відео з тестами та вікторинами!</p>
+        </div>
+    </div>
     <footer>
         <div class="footer-left">
-            <a href="index.html"><img src="logo.png" alt="Логотип" class="footer-logo"></a>
-            <a href="https://www.youtube.com/@ЗнанняДляВсіхТак" class="youtube-icon">
-                <img src="youtube-icon.png" alt="YouTube">
-            </a>
+            <img src="logo.png" alt="Логотип" class="footer-logo">
         </div>
         <div class="footer-center">
-            <button id="categories-btn">Категорії ▼</button>
+            <button id="categories-btn">Категорії</button>
             <ul id="categories-list" style="display: none;">
                 <li><a href="category.html?category=Географія">Географія</a></li>
                 <li><a href="category.html?category=Історія">Історія</a></li>
@@ -59,8 +68,24 @@
             </div>
         </div>
         <div class="footer-right">
-            <a href="https://www.youtube.com/@ЗнанняДляВсіхТак?sub_confirmation=1" class="subscribe-btn">Підписатися</a>
+            <p>© 2025 Знання для всіх</p>
         </div>
     </footer>
+    <script>
+        // Оновлення годинника і дати
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('clock').textContent = now.toLocaleTimeString('uk-UA');
+            document.getElementById('date').textContent = now.toLocaleDateString('uk-UA');
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Випадаючий список категорій у футері
+        document.getElementById('categories-btn').addEventListener('click', () => {
+            const list = document.getElementById('categories-list');
+            list.style.display = list.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
 </body>
 </html>
