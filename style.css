@@ -49,7 +49,7 @@ header::before {
 }
 
 .youtube-icon img {
-    width: 120px; /* Збільшуємо розмір, щоб відповідати кнопці "Підписатися" */
+    width: 80px; /* Зменшуємо розмір */
     height: auto;
     margin-top: 10px;
     border-radius: 4px;
@@ -88,8 +88,8 @@ h1 a {
     background-color: #1a3c34;
     display: inline-block;
     padding: 5px 10px;
-    border-radius: 8px; /* Додаємо скруглення */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Додаємо об’ємність */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .header-right {
@@ -217,6 +217,13 @@ footer {
     width: 50px;
 }
 
+.footer-youtube-icon img {
+    width: 40px; /* Невеликий розмір для іконки YouTube у футері */
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
 .footer-center {
     text-align: center;
 }
@@ -227,8 +234,8 @@ footer {
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-    border-radius: 8px; /* Додаємо скруглення */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Додаємо об’ємність */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 #categories-list {
