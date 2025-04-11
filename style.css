@@ -1,4 +1,3 @@
-/* style.css */
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 body {
@@ -12,7 +11,13 @@ header {
     display: flex;
     align-items: center;
     padding: 10px 20px;
-    background: linear-gradient(to right, #3e2723, #5d4037);
+    background: linear-gradient(to right, #261514, #422321); /* Темніший градієнт */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Додаємо тінь для об’ємності */
+}
+
+/* Прибираємо розмитий ефект */
+header::before {
+    display: none; /* Видаляємо псевдоелемент */
 }
 
 .logo {
@@ -23,13 +28,20 @@ header {
 
 .logo img {
     width: 50px;
-    border: 2px solid #ffff00;
+    height: auto;
+    border: none; /* Прибираємо обведення */
     border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Нейтральна тінь */
 }
 
 .youtube-icon img {
     width: 40px;
+    height: auto;
     margin-top: 10px;
+    border-radius: 4px; /* Зменшуємо скруглення */
+    background-color: #ff0000; /* Червоний фон, як у кнопки "Підписатися" */
+    padding: 4px; /* Відступ для кращого вигляду */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Нейтральна тінь */
 }
 
 .header-center {
@@ -43,9 +55,10 @@ header {
 }
 
 h1 {
-    font-size: 36px;
+    font-size: 75px; /* Збільшуємо розмір */
     color: #ffff00;
     margin: 0;
+    text-shadow: 0 0 8px #FFD700, 0 0 16px #FFD700; /* М’якше неонове сяйво */
 }
 
 h1 a {
@@ -74,9 +87,10 @@ h1 a {
     color: #ffffff;
     padding: 10px 20px;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 4px; /* Узгоджуємо з іконкою YouTube */
     display: block;
     margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Додаємо об’ємність */
 }
 
 .divider {
@@ -128,10 +142,32 @@ h1 a {
     padding: 10px;
 }
 
+/* Стилі для обкладинок відео */
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.thumbnail {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.thumbnail:hover {
+    transform: scale(1.05); /* Легке збільшення при наведенні */
+}
+
+/* Стилі для плеєра */
 #latest-videos iframe, #random-videos iframe, #category-videos iframe {
     width: 100%;
     max-width: 300px;
     height: 169px;
+    border-radius: 5px;
 }
 
 #latest-videos p, #random-videos p, #category-videos p {
@@ -214,6 +250,31 @@ footer {
     text-align: left;
 }
 
+/* Стилі для лоадера */
+.loading {
+    position: relative;
+    min-height: 100px; /* Забезпечуємо місце для лоадера */
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    border: 4px solid #FFD700;
+    border-top: 4px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
 @media (max-width: 600px) {
     header {
         flex-direction: column;
@@ -237,5 +298,8 @@ footer {
     }
     .footer-right {
         text-align: center;
+    }
+    h1 {
+        font-size: 40px; /* Зменшуємо для малих екранів */
     }
 }
