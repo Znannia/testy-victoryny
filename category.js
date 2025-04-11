@@ -2,10 +2,9 @@ const API_KEY = 'AIzaSyCILrgPfPm9NS6cgQHZhnXjcD7ab-GghDg'; // Залиште в�
 
 // Отримання категорії з URL
 const urlParams = new URLSearchParams(window.location.search);
-const category = decodeURIComponent(urlParams.get('category')); // Декодуємо параметр
+const category = decodeURIComponent(urlParams.get('category'));
 document.getElementById('category-title').textContent = category || 'Категорія не вказана';
 
-// Плейлисти
 const playlistIds = {
     'Географія': 'PLOI77RmcxMp7iQywXcinPbgpl4kTXx_oV',
     'Історія': 'PLOI77RmcxMp57Hj3qFR8kv0D1rYs-MJNO',
@@ -19,12 +18,43 @@ const playlistIds = {
 
 const playlistId = playlistIds[category];
 
+// Функція для перевірки тривалості відео (виключаємо Shorts)
+async function filterNonShorts(videoIds) {
+    if (!videoIds.length) return [];
+    const response = await fetch(
+        `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videoIds.join(',')}&key=${API_KEY}`
+    );
+    if (!response.ok) {
+        console.error('Помилка завантаження тривалості відео:', response.statusText);
+        return videoIds;
+    }
+    const data = await response.json();
+    const nonShorts = [];
+    data.items.forEach((item, index) => {
+        const duration = item.contentDetails.duration;
+        const durationSeconds = parseDuration(duration);
+        if (durationSeconds >= 60) {
+            nonShorts.push(videoIds[index]);
+        }
+    });
+    return nonShorts;
+}
+
+// Функція для парсингу тривалості у секунди
+function parseDuration(duration) {
+    const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+    const hours = parseInt(match[1]) || 0;
+    const minutes = parseInt(match[2]) || 0;
+    const seconds = parseInt(match[3]) || 0;
+    return hours * 3600 + minutes * 60 + seconds;
+}
+
 // Функція для відображення відео (з обкладинками)
 function renderVideos(videos, container) {
     videos.forEach(video => {
         const videoId = video.snippet.resourceId.videoId;
         const title = video.snippet.title;
-        const thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`; // Обкладинка відео
+        const thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
         const videoElement = document.createElement('div');
         videoElement.innerHTML = `
             <div class="video-container">
@@ -35,7 +65,6 @@ function renderVideos(videos, container) {
         container.appendChild(videoElement);
     });
 
-    // Додаємо обробник кліків для обкладинок
     document.querySelectorAll('.thumbnail').forEach(thumbnail => {
         thumbnail.addEventListener('click', (e) => {
             const videoId = e.target.getAttribute('data-video-id');
@@ -52,11 +81,10 @@ async function fetchCategoryVideos() {
     const categoryVideosDiv = document.getElementById('category-videos');
     const cacheKey = `categoryVideos_${category}`;
     const cacheTimeKey = `categoryVideosTime_${category}`;
-    const cacheDuration = 24 * 60 * 60 * 1000; // 24 години
+    const cacheDuration = 24 * 60 * 60 * 1000;
 
-    categoryVideosDiv.classList.add('loading'); // Додаємо лоадер
+    categoryVideosDiv.classList.add('loading');
 
-    // Перевіряємо кеш
     const cachedVideos = localStorage.getItem(cacheKey);
     const cachedTime = localStorage.getItem(cacheTimeKey);
     const now = new Date().getTime();
@@ -82,14 +110,24 @@ async function fetchCategoryVideos() {
             throw new Error('Не вдалося завантажити відео');
         }
         const data = await response.json();
-        const videos = data.items.filter(item => item.snippet && item.snippet.resourceId && item.snippet.resourceId.videoId);
+        let videos = data.items.filter(item => 
+            item.snippet && 
+            item.snippet.resourceId && 
+            item.snippet.resourceId.videoId && 
+            item.snippet.title !== 'Private video' // Виключаємо "Private video"
+        );
+
+        // Фільтруємо Shorts
+        const videoIds = videos.map(video => video.snippet.resourceId.videoId);
+        const nonShortsIds = await filterNonShorts(videoIds);
+        videos = videos.filter(video => nonShortsIds.includes(video.snippet.resourceId.videoId));
+
         if (videos.length === 0) {
             categoryVideosDiv.innerHTML = '<p>Немає доступних відео у цій категорії.</p>';
             categoryVideosDiv.classList.remove('loading');
             return;
         }
 
-        // Зберігаємо в кеш
         localStorage.setItem(cacheKey, JSON.stringify(videos));
         localStorage.setItem(cacheTimeKey, now.toString());
 
@@ -109,7 +147,7 @@ document.getElementById('categories-btn').addEventListener('click', () => {
     list.style.display = list.style.display === 'none' ? 'block' : 'none';
 });
 
-// Оновлення годинника і дати (додаємо для синхронізації з index.html)
+// Оновлення годинника і дати
 function updateTime() {
     const now = new Date();
     document.getElementById('clock').textContent = now.toLocaleTimeString('uk-UA');
