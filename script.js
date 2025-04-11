@@ -1,5 +1,5 @@
 // script.js
-const API_KEY = 'AIzaSyCsQ-lA5zK4THqs3C_1b_YASGHZ2lxnVNY'; // Замініть на ваш YouTube API-ключ
+const API_KEY = 'AIzaSyCILrgPfPm9NS6cgQHZhnXjcD7ab-GghDg'; // Замініть на ваш YouTube API-ключ
 const CHANNEL_ID = 'UC0usNaN5iwML35qPxASBDWQ';
 
 // Оновлення годинника і дати
